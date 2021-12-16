@@ -1,4 +1,5 @@
 package controlers;
+
 import Model.ItemDbUtil;
 import Model.Item;
 
@@ -12,7 +13,8 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/controllers.addSubItems")
 public class AddSubItems extends HttpServlet {
-    ItemDbUtil db = new ItemDbUtil();
+
+    ItemDbUtil dbUtil = new ItemDbUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,15 +23,11 @@ public class AddSubItems extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         String id = request.getParameter("id");
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("userEmail");
-
 
         if (id == null) {
             request.getRequestDispatcher("homePage.jsp").forward(request, response);
         } else {
             request.setAttribute("id", id);
-
             request.getRequestDispatcher("addSubPage.jsp").forward(request, response);
         }
 
@@ -45,15 +43,12 @@ public class AddSubItems extends HttpServlet {
         String date = request.getParameter("ItemDate");
         String time = request.getParameter("ItemTime");
         HttpSession session = request.getSession();
-
         String email = (String) session.getAttribute("userEmail");
 
         if (!label.trim().equals("")) {
-            db.addSubItem(id, email, new Item(label, date, time, 0));
+            dbUtil.addSubItem(id, email, new Item(label, date, time, 0));
         }
-
         response.sendRedirect("homePage.jsp");
-
     }
 
 

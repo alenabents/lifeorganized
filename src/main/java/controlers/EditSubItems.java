@@ -1,6 +1,5 @@
 package controlers;
 
-
 import Model.Item;
 import Model.ItemDbUtil;
 
@@ -14,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/controllers.editSubItems")
 public class EditSubItems extends HttpServlet {
-    ItemDbUtil db = new ItemDbUtil();
+    ItemDbUtil dbUtil = new ItemDbUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,11 +23,10 @@ public class EditSubItems extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("userEmail");
 
-
         if (id == null) {
             request.getRequestDispatcher("editPage.jsp").forward(request, response);
         } else {
-            Item task = db.getSubItemWithId(id,email);
+            Item task = dbUtil.getSubItemWithId(id, email);
             if (task != null) {
                 String label = task.getLabel();
                 String date = task.getDate();
@@ -39,11 +37,9 @@ public class EditSubItems extends HttpServlet {
                 request.setAttribute("itemDate", date);
                 request.setAttribute("itemTime", time);
                 request.setAttribute("itemCheck", check);
-
             }
             request.getRequestDispatcher("editSubPage.jsp").forward(request, response);
         }
-
     }
 
     @Override
@@ -51,22 +47,19 @@ public class EditSubItems extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
         String id = request.getParameter("id");
         String label = request.getParameter("ItemLabel");
         String date = request.getParameter("ItemDate");
         String time = request.getParameter("ItemTime");
         HttpSession session = request.getSession();
-
         String email = (String) session.getAttribute("userEmail");
 
         System.out.println(id);
         if (!label.trim().equals("")) {
-            db.updateSubTodo(new Item(label, date,time, 0),id, email);
+            dbUtil.updateSubTodo(new Item(label, date, time, 0), id, email);
         }
 
         response.sendRedirect("homePage.jsp");
-
     }
-
-
 }

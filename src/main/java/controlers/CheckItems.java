@@ -19,30 +19,22 @@ public class CheckItems extends HttpServlet {
         super();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        Boolean check = request.getParameter("check") != null;
-        String [] checked = request.getParameterValues("check");
-
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
         String email = (String) session.getAttribute("userEmail");
-
+        String idStr = request.getParameter("id");
+        String pageName = request.getParameter("pageName");
+        String[] chkSms = request.getParameterValues("chkSms");
+        int isChkSms = 0;
+        if (chkSms != null && chkSms.length > 0) {
+            isChkSms = 1;
+        }
         ItemDbUtil dbUtil = new ItemDbUtil();
+        dbUtil.setCheck(email, idStr, isChkSms);
+        request.setAttribute("id", idStr);
 
-        dbUtil.checkItem(email, Integer.parseInt(checked[0]), check);
-
-        // making an html attribute
-        request.setAttribute("check", check);
-
-        // making a request dispatcher
-        RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
-
-        // send list to home.jsp
+        RequestDispatcher dispatcher = request.getRequestDispatcher(pageName);
         dispatcher.forward(request, response);
-
     }
+
 }

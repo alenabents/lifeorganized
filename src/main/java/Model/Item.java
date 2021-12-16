@@ -32,6 +32,7 @@ public class Item {
 
     public Item(int id, String label, String date, String time, int check, String response) {
         super();
+        this.id = id;
         this.label = label;
         this.date = date;
         this.time = time;
@@ -79,4 +80,7 @@ public class Item {
         this.check = check;
     }
 
+    public String getInformFriend() {
+        return info;
+    }
 }

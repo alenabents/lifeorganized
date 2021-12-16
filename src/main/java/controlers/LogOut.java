@@ -10,23 +10,17 @@ import java.io.IOException;
 
 @WebServlet("/controllers.logOut")
 public class LogOut extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
 
     public LogOut() {
         super();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
 
         session.invalidate();
-
         response.sendRedirect("welcome.jsp");
-
     }
-
 }

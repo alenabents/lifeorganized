@@ -1,6 +1,5 @@
 package controlers;
 
-
 import Model.ItemDbUtil;
 
 import javax.servlet.ServletException;
@@ -15,24 +14,21 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/controllers.ShareItems")
 public class ShareItems extends HttpServlet {
-    ItemDbUtil db = new ItemDbUtil();
+    ItemDbUtil dbUtil = new ItemDbUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
         String id = request.getParameter("id"); // номер заголовка
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("userEmail");
-        request.setAttribute("id" , id);
+        request.setAttribute("id", id);
 
         if (id == null) {
             request.getRequestDispatcher("homePage.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("SharePage.jsp").forward(request, response);
         }
-
     }
 
     @Override
@@ -41,6 +37,7 @@ public class ShareItems extends HttpServlet {
         HttpSession session = request.getSession();
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
         String id = request.getParameter("id"); //ай ди главного листа
         String email = (String) session.getAttribute("userEmail");
         String size = request.getParameter("count");
@@ -48,24 +45,19 @@ public class ShareItems extends HttpServlet {
 
         List<String> responses = new ArrayList<>();
 
-        for (int i = 0; i < Integer.parseInt(size); i++){
+        for (int i = 0; i < Integer.parseInt(size); i++) {
             responses.add(request.getParameter(Integer.toString(i))); //получаем ответственных
         }
 
-        String message = db.share(id,email, users,responses);
+        String message = dbUtil.share(id, email, users, responses);
 
-         if(message.equals("sent successfully")){
-             request.setAttribute("message", message);
-             request.getRequestDispatcher("homePage.jsp").forward(request, response);
-         }
-         else {
-             request.setAttribute("message", message);
-             request.getRequestDispatcher("SharePage.jsp").forward(request, response);
-         }
-
-
-
+        if (message.equals("sent successfully")) {
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("homePage.jsp").forward(request, response);
+        } else {
+            request.setAttribute("message", message);
+            request.setAttribute("id", id);
+            request.getRequestDispatcher("SharePage.jsp").forward(request, response);
+        }
     }
-
-
 }

@@ -15,8 +15,7 @@ import java.io.IOException;
 public class DeleteItems extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
@@ -24,11 +23,10 @@ public class DeleteItems extends HttpServlet {
         String email = (String) session.getAttribute("userEmail");
 
         ItemDbUtil dbUtil = new ItemDbUtil();
-        dbUtil.deleteItem(id,email);
+        dbUtil.deleteItem(id, email);
         dbUtil.deleteSubTable(id, email);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
 
-        // send list to home.jsp
+        RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -24,9 +24,9 @@ public class DeleteSubItems extends HttpServlet {
         String email = (String) session.getAttribute("userEmail");
 
         ItemDbUtil dbUtil = new ItemDbUtil();
-        dbUtil.deleteSubItem(id,email);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
+        dbUtil.deleteSubItem(id, email);
 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
         dispatcher.forward(request, response);
     }
 

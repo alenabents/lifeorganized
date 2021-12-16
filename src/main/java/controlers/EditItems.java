@@ -14,12 +14,10 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/controllers.editItems")
 public class EditItems extends HttpServlet {
-    ItemDbUtil db = new ItemDbUtil();
+    ItemDbUtil dbUtil = new ItemDbUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -27,11 +25,10 @@ public class EditItems extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("userEmail");
 
-
         if (id == null) {
             request.getRequestDispatcher("editPage.jsp").forward(request, response);
         } else {
-            Item task = db.getItemWithId(id,email);
+            Item task = dbUtil.getItemWithId(id, email);
             if (task != null) {
                 String label = task.getLabel();
                 String date = task.getDate();
@@ -46,7 +43,6 @@ public class EditItems extends HttpServlet {
             }
             request.getRequestDispatcher("editPage.jsp").forward(request, response);
         }
-
     }
 
     @Override
@@ -64,12 +60,9 @@ public class EditItems extends HttpServlet {
         String email = (String) session.getAttribute("userEmail");
 
         if (!label.trim().equals("")) {
-            db.updateTodo(new Item(label, date,time, 0),id, email);
+            dbUtil.updateTodo(new Item(label, date, time, 0), id, email);
         }
 
         response.sendRedirect("homePage.jsp");
-
     }
-
-
 }
