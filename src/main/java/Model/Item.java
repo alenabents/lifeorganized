@@ -7,6 +7,7 @@ public class Item {
     private String date;
     private String time;
     private int check;
+    private String info;
 
     public Item(int id, String label, String date, String time, int check) {
         super();
@@ -27,6 +28,15 @@ public class Item {
         this.date = date;
         this.time = time;
         this.check = check;
+    }
+
+    public Item(int id, String label, String date, String time, int check, String response) {
+        super();
+        this.label = label;
+        this.date = date;
+        this.time = time;
+        this.check = check;
+        this.info = response;
     }
 
     public int getId() {
