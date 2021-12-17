@@ -29,7 +29,7 @@
 <h1 style="text-align:center"> Редактировать подзадачу </h1>
 
 <form action="controllers.editSubItems" method="post">
-    <table id="table1" style="margin-left:auto;margin-right:auto;">
+    <table style="margin-left:auto;margin-right:auto;">
         <tr>
             <td>подзадача:</td>
             <td>
@@ -76,22 +76,22 @@
     List<List<Item>> listItems = dbUtil.getItems(email);
     request.setAttribute("listItems", listItems);
 %>
-<table style="border:1px solid black;margin-left:auto;margin-right:auto;">
+<table id="table1" style="border:1px solid black;margin-left:auto;margin-right:auto;">
     <tr>
-        <th style="padding:0 20px 0 20px;">задача</th>
-        <th style="padding:0 20px 0 20px;">дата</th>
-        <th style="padding:0 20px 0 20px;">время</th>
-        <th style="padding:0 20px 0 20px;">редактировать</th>
-        <th style="padding:0 20px 0 20px;">удалить</th>
-        <th style="padding:0 20px 0 20px;">добавить</th>
-        <th style="padding:0 20px 0 20px;">поделиться</th>
+        <th style="padding:3px 20px 3px 20px;">задача</th>
+        <th style="padding:3px 20px 3px 20px;">дата</th>
+        <th style="padding:3px 20px 3px 20px;">время</th>
+        <th style="padding:3px 20px 3px 20px;">редактировать</th>
+        <th style="padding:3px 20px 3px 20px;">удалить</th>
+        <th style="padding:3px 20px 3px 20px;">добавить</th>
+        <th style="padding:3px 20px 3px 20px;">поделиться</th>
     </tr>
 
     <c:forEach var="tempItem" items="${listItems}">
         <tr>
                 <%-- чекбокс --%>
             <form action="controllers.checkItems">
-                <td style="padding:0 20px 0 60px;">
+                <td style="padding:3px 20px 3px 40px;">
                     <input type="hidden" name="id" value="${tempItem.get(0).id}">
                     <input type="hidden" name="pageName" value="editSubPage.jsp">
                     <c:choose>
@@ -108,27 +108,27 @@
                     </label>${tempItem.get(0).label}
                 </td>
             </form>
-            <td style="padding:0 20px 0 60px;">${tempItem.get(0).date}</td>
-            <td style="padding:0 20px 0 60px;">${tempItem.get(0).time}</td>
+            <td style="padding:3px 20px 3px 40px;">${tempItem.get(0).date}</td>
+            <td style="padding:3px 20px 3px 40px;">${tempItem.get(0).time}</td>
 
                 <%-- редактирование --%>
-            <td style="padding:0 20px 0 40px;">&nbsp;&nbsp;<a class="btn btn-dark btn-sm"
+            <td style="padding:3px 20px 3px 20px;">&nbsp;&nbsp;<a class="btn btn-dark btn-sm"
                                                               href="controllers.editItems?id=${tempItem.get(0).id}">редактировать</a>
             </td>
 
                 <%-- удалить --%>
             <form action="controllers.deleteItems" method="post">
-                <td style="padding:0 20px 0 40px;"><input type="hidden" name="id" value="${tempItem.get(0).id}"/> <input
+                <td style="padding:3px 20px 3px 20px;"><input type="hidden" name="id" value="${tempItem.get(0).id}"/> <input
                         class="btn btn-danger btn-sm"
                         type="submit" value="удалить"/></td>
             </form>
 
                 <%-- добавить --%>
-            <td style="padding:0 20px 0 20px;"><a class="btn btn-dark btn-sm"
+            <td style="padding:3px 20px 3px 20px;"><a class="btn btn-dark btn-sm"
                                                   href="controllers.addSubItems?id=${tempItem.get(0).id}">добавить</a>
             </td>
                 <%-- поделиться --%>
-            <td style="padding:0 20px 0 20px;"><a class="btn btn-dark btn-sm"
+            <td style="padding:3px 20px 3px 20px;"><a class="btn btn-dark btn-sm"
                                                   href="controllers.ShareItems?id=${tempItem.get(0).id}">поделиться</a>
             </td>
         </tr>
@@ -141,7 +141,7 @@
                     <tr>
                             <%-- чекбокс --%>
                         <form action="controllers.checkSubItems">
-                            <td style="padding:0 20px 0 80px;">
+                            <td style="padding:3px 20px 3px 60px;">
                                 <input type="hidden" name="id" value="${tempsubItem.id} ${tempItem.get(0).id}">
                                 <input type="hidden" name="pageName" value="editSubPage.jsp">
                                 <c:choose>
@@ -158,17 +158,17 @@
                                 </label>${tempsubItem.label}
                             </td>
                         </form>
-                        <td style="padding:0 20px 0 80px;">${tempsubItem.date}</td>
-                        <td style="padding:0 20px 0 80px;">${tempsubItem.time}</td>
+                        <td style="padding:3px 20px 3px 60px;">${tempsubItem.date}</td>
+                        <td style="padding:3px 20px 3px 60px;">${tempsubItem.time}</td>
 
                             <%-- редакт --%>
-                        <td style="padding:0 20px 0 55px;">&nbsp;&nbsp;<a class="btn btn-dark btn-sm"
+                        <td style="padding:3px 20px 3px 45px;">&nbsp;&nbsp;<a class="btn btn-dark btn-sm"
                                                                           href="controllers.editSubItems?id=${tempsubItem.id} ${tempItem.get(0).id}">редактировать</a>
                         </td>
 
                             <%-- удалить --%>
                         <form action="controllers.deleteSubItems" method="post">
-                            <td style="padding:0 20px 0 55px;"><input type="hidden" name="id"
+                            <td style="padding:3px 20px 3px 45px;"><input type="hidden" name="id"
                                                                       value="${tempsubItem.id} ${tempItem.get(0).id}"/>
                                 <input class="btn btn-danger btn-sm" type="submit" value="удалить"/></td>
                         </form>
@@ -179,5 +179,6 @@
         <tr height=20px></tr>
     </c:forEach>
 </table>
+<script src="script.js"></script>
 </body>
 </html>

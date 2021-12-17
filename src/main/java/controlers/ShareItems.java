@@ -38,7 +38,7 @@ public class ShareItems extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String id = request.getParameter("id"); //ай ди главного листа
+        String id = request.getParameter("id");
         String email = (String) session.getAttribute("userEmail");
         String size = request.getParameter("count");
         String users = request.getParameter("users");
@@ -46,7 +46,7 @@ public class ShareItems extends HttpServlet {
         List<String> responses = new ArrayList<>();
 
         for (int i = 0; i < Integer.parseInt(size); i++) {
-            responses.add(request.getParameter(Integer.toString(i))); //получаем ответственных
+            responses.add(request.getParameter(Integer.toString(i)));
         }
 
         String message = dbUtil.share(id, email, users, responses);

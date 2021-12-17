@@ -78,5 +78,6 @@
         <tr height=20px></tr>
     </c:forEach>
 </table>
+<script src="script.js"></script>
 </body>
 </html>

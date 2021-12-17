@@ -297,7 +297,7 @@ public class ItemDbUtil {
         return userAdded;
     }
 
-    public void updateTodo(Item task, String id, String email) { //редактировать главную задачу
+    public void updateTodo(Item task, String id, String email) {
 
         Connection conn = null;
         String tableName = getTableName(email);
@@ -318,7 +318,7 @@ public class ItemDbUtil {
         }
     }
 
-    public void addSubItem(String id, String email, Item task) { //добавить подзадачу
+    public void addSubItem(String id, String email, Item task) {
         Connection conn = null;
         String tableName = getTableName(email) + id;
         try {
@@ -457,7 +457,7 @@ public class ItemDbUtil {
         }
     }
 
-    public int addFriendItem(Item theItem, String email, String emailUser) {// mail того кто поделился
+    public int addFriendItem(Item theItem, String email, String emailUser) {// email того кто поделился, emailUser - с кем
 
         Connection conn = null;
         String tableName = "friend" + getTableName(emailUser);
