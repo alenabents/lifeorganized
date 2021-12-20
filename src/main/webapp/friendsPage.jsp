@@ -37,9 +37,8 @@
 <h2>Списки друзей: </h2>
 <hr>
 <%
-    ItemDbUtil dbUtil = new ItemDbUtil();
     String email = (String) session.getAttribute("userEmail");
-    List<List<Item>> listItems = dbUtil.getFriendsItems(email);
+    List<List<Item>> listItems = ItemDbUtil.getFriendsItems(email);
     request.setAttribute("listItems", listItems);
 %>
 <table id="table1" style="border:1px solid black;margin-left:auto;margin-right:auto;">

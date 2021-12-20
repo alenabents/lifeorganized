@@ -25,17 +25,21 @@
         <h1>Регистрация</h1>
         <br>
         <br>
-        <form action="controllers.signUp" method="post">
+
+        <p id="message">Пожалуйста заполните все поля</p>
+        <p id="messagePass"></p>
+        <form action="controllers.signUp" method="post" onsubmit="return (validMail())">
+
             <strong>Введите Email: </strong>
-            <input type="text" name="email" placeholder="user@example.com" size=25/>
+            <input id="email" type="text"  name="email" onkeyup="validMail(this.value)" placeholder="user@example.com" size=25/>
             <br>
             <br>
             <strong>Введите пароль: </strong>
-            <input type="password" name="password"/>
+            <input id="password" type="password" name="password" onkeyup="validPassword(this.value)"/>
             <br>
             <br>
             <strong>Повторите пароль: </strong>
-            <input type="password" name="confirmPassword"/>
+            <input id="password2" type="password" onkeyup="validPassword(this.value)" name="confirmPassword"/>
             <br>
             <p style="color:#ffffff;">${emailError}</p>
             <p style="color:#ffffff;">${passwordError}</p>
@@ -45,9 +49,13 @@
                     <a href="logIn.jsp">Войдите</a>
                 </p>
             </c:if>
-            <input class="btn btn-dark" type="submit" name="signedUp" value="Зарегистрироваться"/>
+            <input name="button" class="btn btn-dark" type="submit" name="signedUp" value="Зарегистрироваться" />
         </form>
     </c:otherwise>
 </c:choose>
+<script src="validEmaill.js">
+</script>
+<script src="checkPassword.js">
+</script>
 </body>
 </html>

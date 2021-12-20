@@ -71,9 +71,8 @@
 <h2>Мри задачи: </h2>
 <hr>
 <%
-    ItemDbUtil dbUtil = new ItemDbUtil();
     String email = (String) session.getAttribute("userEmail");
-    List<List<Item>> listItems = dbUtil.getItems(email);
+    List<List<Item>> listItems = ItemDbUtil.getItems(email);
     request.setAttribute("listItems", listItems);
 %>
 <table id="table1" style="border:1px solid black;margin-left:auto;margin-right:auto;">
@@ -163,7 +162,7 @@
 
                             <%-- редакт --%>
                         <td style="padding:3px 20px 3px 45px;">&nbsp;&nbsp;<a class="btn btn-dark btn-sm"
-                                                                          href="controllers.editSubItems?id=${tempsubItem.id} ${tempItem.get(0).id}">редактировать</a>
+                                                                          href="controllers.editSubItems?id=${tempsubItem.id}">редактировать</a>
                         </td>
 
                             <%-- удалить --%>

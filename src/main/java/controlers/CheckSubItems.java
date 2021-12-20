@@ -1,6 +1,6 @@
 package controlers;
 
-import Model.ItemDbUtil;
+import Model.SubItemDbUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,8 +28,7 @@ public class CheckSubItems extends HttpServlet {
         if (chkSms != null && chkSms.length > 0) {
             isChkSms = 1;
         }
-        ItemDbUtil dbUtil = new ItemDbUtil();
-        dbUtil.setSubCheck(email, idStr, isChkSms);
+        SubItemDbUtil.setSubCheck(email, idStr, isChkSms);
         String[] ids = idStr.split(" ");
 
         request.setAttribute("id", ids[1]);

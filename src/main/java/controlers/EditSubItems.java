@@ -13,7 +13,6 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/controllers.editSubItems")
 public class EditSubItems extends HttpServlet {
-    ItemDbUtil dbUtil = new ItemDbUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +25,7 @@ public class EditSubItems extends HttpServlet {
         if (id == null) {
             request.getRequestDispatcher("editPage.jsp").forward(request, response);
         } else {
-            Item task = dbUtil.getSubItemWithId(id, email);
+            Item task = ItemDbUtil.getItemWithId(id, email);
             if (task != null) {
                 String label = task.getLabel();
                 String date = task.getDate();
@@ -57,7 +56,7 @@ public class EditSubItems extends HttpServlet {
 
         System.out.println(id);
         if (!label.trim().equals("")) {
-            dbUtil.updateSubTodo(new Item(label, date, time, 0), id, email);
+            ItemDbUtil.updateTodo(new Item(label, date, time, 0), id, email);
         }
 
         response.sendRedirect("homePage.jsp");

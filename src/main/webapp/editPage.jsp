@@ -70,9 +70,8 @@
 <h2>Мои задачи: </h2>
 <hr>
 <%
-    ItemDbUtil dbUtil = new ItemDbUtil();
     String email = (String) session.getAttribute("userEmail");
-    List<List<Item>> listItems = dbUtil.getItems(email);
+    List<List<Item>> listItems = ItemDbUtil.getItems(email);
     request.setAttribute("listItems", listItems);
 %>
 <table id="table1" style="border:1px solid black;margin-left:auto;margin-right:auto;">
@@ -140,7 +139,7 @@
                             <%-- чекбокс --%>
                         <form action="controllers.checkSubItems">
                             <td style="padding:3px 20px 3px 60px;">
-                                <input type="hidden" name="id" value="${tempsubItem.id} ${tempItem.get(0).id}">
+                                <input type="hidden" name="id" value="${tempsubItem.id}">
                                 <input type="hidden" name="pageName" value="editPage.jsp">
                                 <c:choose>
                                     <c:when test="${tempsubItem.check==1}">
@@ -161,13 +160,13 @@
 
                             <%-- редакт --%>
                         <td style="padding:3px 20px 3px 45px;">&nbsp;&nbsp;<a class="btn btn-dark btn-sm"
-                                                                          href="controllers.editSubItems?id=${tempsubItem.id} ${tempItem.get(0).id}">редактировать</a>
+                                                                          href="controllers.editSubItems?id=${tempsubItem.id}">редактировать</a>
                         </td>
 
                             <%-- удалить --%>
                         <form action="controllers.deleteSubItems" method="post">
                             <td style="padding:3px 20px 3px 45px;"><input type="hidden" name="id"
-                                                                      value="${tempsubItem.id} ${tempItem.get(0).id}"/>
+                                                                      value="${tempsubItem.id}"/>
                                 <input class="btn btn-danger btn-sm" type="submit" value="удалить"/></td>
                         </form>
                     </tr>

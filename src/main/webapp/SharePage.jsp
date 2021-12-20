@@ -4,6 +4,7 @@
 <%@ page import="Model.ItemDbUtil" %>
 <%@ page import="Model.Item" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Model.SubItemDbUtil" %>
 
 <!DOCTYPE html>
 <html>
@@ -32,13 +33,12 @@
 
 <form action="controllers.ShareItems" method="post">
     <%
-        ItemDbUtil dbUtil = new ItemDbUtil();
-        List<List<Item>> listItems = dbUtil.getItems(uname);
+        List<List<Item>> listItems = ItemDbUtil.getItems(uname);
         request.setAttribute("listItems", listItems);
         String id = (String) request.getAttribute("id");
 
-        Item mainItem = dbUtil.getItemWithId(id, uname);
-        List<Item> shareItems = dbUtil.getSubItems(Integer.parseInt(id), uname, mainItem);
+        Item mainItem = ItemDbUtil.getItemWithId(id, uname);
+        List<Item> shareItems = SubItemDbUtil.getSubItems(Integer.parseInt(id), uname, mainItem);
         request.setAttribute("shareItems", shareItems);
     %>
     <table style="border:1px solid #0c0b0b;margin-left:auto;margin-right:auto;">
@@ -194,7 +194,7 @@
 
                             <%-- реадакт --%>
                         <td style="padding:3px 20px 3px 45px;">&nbsp;&nbsp;<a class="btn btn-dark btn-sm"
-                                                                          href="controllers.editSubItems?id=${tempsubItem.id} ${tempItem.get(0).id}">редактировать</a>
+                                                                          href="controllers.editSubItems?id=${tempsubItem.id} ">редактировать</a>
                         </td>
 
                             <%-- удалить --%>

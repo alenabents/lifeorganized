@@ -14,7 +14,6 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/controllers.ShareItems")
 public class ShareItems extends HttpServlet {
-    ItemDbUtil dbUtil = new ItemDbUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,8 +47,7 @@ public class ShareItems extends HttpServlet {
         for (int i = 0; i < Integer.parseInt(size); i++) {
             responses.add(request.getParameter(Integer.toString(i)));
         }
-
-        String message = dbUtil.share(id, email, users, responses);
+        String message = ItemDbUtil.share(id, email, users, responses);
 
         if (message.equals("sent successfully")) {
             request.setAttribute("message", message);

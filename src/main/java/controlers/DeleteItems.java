@@ -1,6 +1,7 @@
 package controlers;
 
 import Model.ItemDbUtil;
+import Model.SubItemDbUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +23,8 @@ public class DeleteItems extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("userEmail");
 
-        ItemDbUtil dbUtil = new ItemDbUtil();
-        dbUtil.deleteItem(id, email);
-        dbUtil.deleteSubTable(id, email);
+        ItemDbUtil.deleteItem(id, email);
+        SubItemDbUtil.deleteAllSubTasks(id, email);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
         dispatcher.forward(request, response);

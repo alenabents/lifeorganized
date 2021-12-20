@@ -22,9 +22,7 @@ public class DeleteFriendItems extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("userEmail");
 
-        ItemDbUtil dbUtil = new ItemDbUtil();
-        dbUtil.deleteFriendItem(id, email);
-        dbUtil.deleteSubFriendTable(id, email);
+        ItemDbUtil.deleteFriendItem(id, email);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("friendsPage.jsp");
         dispatcher.forward(request, response);

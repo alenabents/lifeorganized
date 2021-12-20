@@ -29,8 +29,7 @@ public class CheckItems extends HttpServlet {
         if (chkSms != null && chkSms.length > 0) {
             isChkSms = 1;
         }
-        ItemDbUtil dbUtil = new ItemDbUtil();
-        dbUtil.setCheck(email, idStr, isChkSms);
+        ItemDbUtil.setCheck(email, idStr, isChkSms);
         request.setAttribute("id", idStr);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(pageName);

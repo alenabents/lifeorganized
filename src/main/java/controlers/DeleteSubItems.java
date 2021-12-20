@@ -1,6 +1,6 @@
 package controlers;
 
-import Model.ItemDbUtil;
+import Model.SubItemDbUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,8 +23,7 @@ public class DeleteSubItems extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("userEmail");
 
-        ItemDbUtil dbUtil = new ItemDbUtil();
-        dbUtil.deleteSubItem(id, email);
+        SubItemDbUtil.deleteSubItem(id, email);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
         dispatcher.forward(request, response);

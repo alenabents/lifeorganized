@@ -1,7 +1,7 @@
 package controlers;
 
-import Model.ItemDbUtil;
 import Model.Item;
+import Model.SubItemDbUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +13,6 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/controllers.addSubItems")
 public class AddSubItems extends HttpServlet {
-
-    ItemDbUtil dbUtil = new ItemDbUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +44,7 @@ public class AddSubItems extends HttpServlet {
         String email = (String) session.getAttribute("userEmail");
 
         if (!label.trim().equals("")) {
-            dbUtil.addSubItem(id, email, new Item(label, date, time, 0));
+            SubItemDbUtil.addSubItem(id, email, new Item(label, date, time, 0));
         }
         response.sendRedirect("homePage.jsp");
     }

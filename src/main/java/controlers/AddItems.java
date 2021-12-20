@@ -37,13 +37,11 @@ public class AddItems extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("userEmail");
 
-        ItemDbUtil dbUtil = new ItemDbUtil();
-
         if (label.length() > 0 || date.length() > 0 || time.length() > 0) {
-            dbUtil.addItem(new Item(label, date, time, 0), email);
+            ItemDbUtil.addItem(new Item(label, date, time, 0), email);
         }
 
-        request.setAttribute("listItems", dbUtil.getItems(email));
+        request.setAttribute("listItems", ItemDbUtil.getItems(email));
         RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
         dispatcher.forward(request, response);
 

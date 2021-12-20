@@ -25,13 +25,15 @@
         <h1>Авторизация</h1>
         <br>
         <br>
-        <form action="controllers.logIn" method="post">
+        <form action="controllers.logIn" method="post" onsubmit="return (validMail())">
+            <p id="message">Пожалуйста заполните все поля</p>
+            <p id="messagePass"></p>
             <strong>Введите Email : </strong>
-            <input type="text" name="email" placeholder="user@example.com" size=25/>
+            <input id="email" type="text" name="email" onkeyup="validMail(this.value)" placeholder="user@example.com" size=25/>
             <br>
             <br>
             <strong>Введите пароль : </strong>
-            <input type="password" name="password"/>
+            <input id="password" onkeyup="validPassword(this.value)" type="password" name="password"/>
             <br>
             <br>
             <c:if test="${not empty emailError}">
@@ -51,5 +53,9 @@
         </form>
     </c:otherwise>
 </c:choose>
+<script src="validEmaill.js">
+</script>
+<script src="checkPassword.js">
+</script>
 </body>
 </html>

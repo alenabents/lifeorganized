@@ -1,3 +1,5 @@
+
+
 let table = document.getElementById('table1');
 let currentElem = null;
 table.onmouseover = function (event) {

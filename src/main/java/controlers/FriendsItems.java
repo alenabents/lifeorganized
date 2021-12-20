@@ -32,8 +32,7 @@ public class FriendsItems extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("userEmail");
 
-        ItemDbUtil dbUtil = new ItemDbUtil();
-        request.setAttribute("listItems", dbUtil.getItems(email));
+        request.setAttribute("listItems", ItemDbUtil.getItems(email));
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("friendsPage.jsp");
         dispatcher.forward(request, response);

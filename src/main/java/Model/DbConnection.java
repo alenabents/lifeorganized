@@ -5,7 +5,6 @@ import java.sql.*;
 public class DbConnection {
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
-
         String dbDriver = "com.mysql.jdbc.Driver";
         Class.forName(dbDriver);
         String dbName = "tododatabase";
@@ -17,15 +16,7 @@ public class DbConnection {
         return conn;
     }
 
-    public static void closeConnection(Connection conn, Statement stmt, ResultSet rst) {
-
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    public static void closeStatement( Statement stmt, ResultSet rst) {
         if (stmt != null) {
             try {
                 stmt.close();
